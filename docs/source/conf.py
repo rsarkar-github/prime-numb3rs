@@ -9,7 +9,7 @@
 project = 'prime-numb3rs'
 copyright = '2025, Rahul Sarkar'
 author = 'Rahul Sarkar'
-release = '2025'
+release = 'v0.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
