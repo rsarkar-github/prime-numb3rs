@@ -1,5 +1,6 @@
 from ..src.Constants import NtConstants
 from ..src.PrimorialUtils import *
+from ..src.GeneralUtils import *
 from ..src.TruncatedSum import *
 from matplotlib import pyplot as plt
 
@@ -12,17 +13,20 @@ if __name__ == "__main__":
     # Initialize the class of constants
     consts = NtConstants()
     
-    # Set m
+    # Set m values, nproc
     mstart = 2
-    mend = 1000
+    mend = 100
+    nproc = 16
+
     mlist = np.arange(mstart, mend + 1, 1)
 
     # Compute lhs of the conjecture
-    lhs = range_primorials_sigma_by_n(mstart=mstart, mend=mend)
+    # lhs = range_primorials_sigma_by_n(mstart=mstart, mend=mend)
+    lhs = sigma_by_n_upper_bound_func1(mstart=mstart, mend=mend)
     lhs = lhs / consts.epowgamma
 
     # Compute rhs of the conjecture
-    rhs = range_primorials_truncated_sum_function(mstart=mstart, mend=mend)
+    rhs = range_primorials_truncated_sum(mstart=mstart, mend=mend, nproc=nproc)
 
     # Plot the graphs
     plt.figure()
