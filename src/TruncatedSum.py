@@ -41,8 +41,11 @@ def range_primorials_truncated_sum(mstart:int, mend:int, nproc:int=1) -> np.ndar
 
 def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc:int=1) -> np.ndarray:
     """
-    Computes the truncated sum function sum_{k=0}^{omega(n)} (ln ln ln (n))^k / k! for all the primorials, primorial(m), for mstart <= m <= mend.
-    Here omega(n)=m is the number of unique primes of n, where n is the mth primorial prime given by n = p1 * p2 * ... * pm, and pk is the kth prime.
+    Computes a lower bound to the truncated sum function sum_{k=0}^{omega(n)} (ln ln ln (n))^k / k! for all the primorials, 
+    primorial(m), for mstart <= m <= mend. Here omega(n)=m is the number of unique primes of n, 
+    where n is the mth primorial prime given by n = p1 * p2 * ... * pm, and pk is the kth prime.
+
+    The lower bound is obtained by setting n = 5040.
     ...
 
     Parameters
@@ -64,7 +67,7 @@ def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc
     assert nproc >= 1
     numba.set_num_threads(n=min(nproc, mp.cpu_count()))
 
-    primes_log3_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64) * 0 + 5041
+    primes_log3_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64) * 0 + 5040
     primes_log3_list = np.log(np.log(np.log(primes_log3_list)))
     result_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64)
     m = [i for i in range(mstart, mend+1)]
@@ -106,3 +109,48 @@ def __truncated_sum_function_numba(input_arr:np.ndarray, mlist:list, output_arr:
         for j in range(mlist[i]):
             fac *= input_arr[i] / (j + 1)
             output_arr[i] += fac
+
+
+def range_primorials_truncated_sum_lower_bound_func2(mstart:int, mend:int, nproc:int=1) -> np.ndarray:
+    """
+    Computes a lower bound to the truncated sum function sum_{k=0}^{omega(n)} (ln ln ln (n))^k / k! for all the primorials, 
+    primorial(m), for mstart <= m <= mend. Here omega(n)=m is the number of unique primes of n, 
+    where n is the mth primorial prime given by n = p1 * p2 * ... * pm, and pk is the kth prime.
+
+    The lower bound is obtained by only considering the leading order term in the sum and adding it to the value of the lower bound for the
+    previous value of m. So recursively the lower bound is computed as follows:
+
+    ..math::
+        S(1) = 1 + ln ln ln(n_1)/ 1!,
+        S(k) = S(k-1) + (ln ln ln(n_k))^k / k!,
+    
+    where :math:`n_k = p1 * p2 * ... * pk`.
+    ...
+
+    Parameters
+    ----------
+    mstart : int
+        The start value of m.
+    
+    mend : int
+        The end value of m.
+    
+    nproc: int
+        Number of processors to use for parallelization. Default is 1.
+
+    Returns
+    -------
+    The np.ndarray of the truncated sum function for each primorial between primorial(mstart) and primorial(mend).
+    """
+
+    assert nproc >= 1
+    numba.set_num_threads(n=min(nproc, mp.cpu_count()))
+
+    primes_log3_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64) * 0 + 5041
+    primes_log3_list = np.log(np.log(np.log(primes_log3_list)))
+    result_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64)
+    m = [i for i in range(mstart, mend+1)]
+
+    __truncated_sum_function_numba(input_arr=primes_log3_list, mlist=m, output_arr=result_list)
+    
+    return result_list

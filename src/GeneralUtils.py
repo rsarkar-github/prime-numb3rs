@@ -4,30 +4,30 @@ import numpy as np
 
 def sigma_by_n_upper_bound_func1(mstart:int, mend:int) -> np.ndarray:
     """
-    Computes the upper bound on the ratio :math:`\sigma(n)/n` of a prime :math:`n = p_1^a_1 * ... * p_m ^ a_m`, with `m` distinct prime factors, 
-    for :math:`mstart <= m <= mend`, where :math:`\sigma(n)` is the sum of divisors of `n`. The primes :math:`p_1, ... , p_m` and 
+    Computes the upper bound on the ratio :math:`\sigma(n)/n` of a prime :math:`n = p_1^a_1 * ... * p_m ^ a_m`, with math:`m` distinct prime factors, 
+    for :math:`mstart <= m <= mend`, where :math:`\sigma(n)` is the sum of divisors of math:`n`. The primes :math:`p_1, ... , p_m` and 
     exponents :math:`a_1, ..., a_m` are irrelevant to the calculation.
 
     The upper bound function 1: 
 
     .. math::
-        \prod_{i=1}^{m} 1 / (1 - 1/q_i), 
+        \prod_{i=1}^{m} 1 / (1 - 1/p_i), 
     
-    where q_i is the ith prime.
+    where math:`p_i` is the math:`i^\text{th}` prime.
 
     ...
 
     Parameters
     ----------
     mstart : int
-        The start value of m.
+        The start value of math:`m`.
     
     mend : int
-        The end value of m.
+        The end value of math:`m`.
 
     Returns
     -------
-    The np.ndarray of the upper bound on the ratio sigma(n)/n of for each primorial between primorial(mstart) and primorial(mend).
+    The np.ndarray of the upper bound on the ratio math:`sigma(n)/n` for each primorial between primorial(mstart) and primorial(mend).
     """
 
     curr_prod = 1.0
