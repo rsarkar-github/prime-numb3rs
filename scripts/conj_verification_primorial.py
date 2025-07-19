@@ -30,7 +30,7 @@ if __name__ == "__main__":
     
     # Set m values, nproc
     mstart = 2
-    mend = 100
+    mend = 1000
     nproc = 16
 
     mlist = np.arange(mstart, mend + 1, 1)
@@ -41,11 +41,13 @@ if __name__ == "__main__":
     lhs = lhs / consts.epowgamma
 
     # Compute upper bound on lhs of the conjecture
-    lhs1 = sigma_by_n_upper_bound_func1(mstart=mstart, mend=mend)
-    lhs1 = lhs1 / consts.epowgamma
+    # lhs1 = sigma_by_n_upper_bound_func1(mstart=mstart, mend=mend)
+    # lhs1 = lhs1 / consts.epowgamma
 
     # Compute rhs of the conjecture
     rhs = range_primorials_truncated_sum(mstart=mstart, mend=mend, nproc=nproc)
+    rhs1 = range_primorials_truncated_sum_lower_bound_func2(mstart=mstart, mend=mend, nproc=nproc)
+
     # rhs = range_primorials_truncated_sum(mstart=mstart, mend=mend+1, nproc=nproc)
     # rhs1 = range_primorials_truncated_sum(mstart=mstart, mend=mend-1, nproc=nproc)
     # rhs2 = range_primorials(mstart=mstart+1, mend=mend)
@@ -59,12 +61,13 @@ if __name__ == "__main__":
     # Plot the graphs
     plt.figure()
     plt.plot(mlist, lhs, '-r.')
-    plt.plot(mlist, lhs1, '-k.')
+    # plt.plot(mlist, lhs1, '-k.')
     # plt.plot(mlist, rhs, '-b.')
     plt.plot(mlist, rhs, '-g.')
+    plt.plot(mlist, rhs1, '-b.')
     plt.grid("on")
     plt.xlabel("$m$")
     # plt.legend(["lhs-exact", "lhs-ub", "rhs-exact", "rhs-lb"])
-    plt.legend(["lhs-exact", "lhs-up", "rhs-exact"])
+    plt.legend(["lhs-exact", "rhs-exact", "rhs-lb"])
     # plt.legend(["$S_m$", "$S_{m-1} (q + 1)/q$"])
     plt.show()
