@@ -23,7 +23,9 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 templates_path = ['_templates']
 exclude_patterns = []
 
-
+latex_elements = {
+    'preamble': r'''\usepackage{amsmath}'''
+}
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
