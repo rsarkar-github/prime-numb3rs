@@ -4,10 +4,26 @@ scripts package
 Submodules
 ----------
 
-scripts.conjecture\_verification\_primorial module
---------------------------------------------------
+scripts.conj\_pi\_function\_additive module
+-------------------------------------------
 
-.. automodule:: scripts.conjecture_verification_primorial
+.. automodule:: scripts.conj_pi_function_additive
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+scripts.conj\_verification\_primorial module
+--------------------------------------------
+
+.. automodule:: scripts.conj_verification_primorial
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+scripts.conj\_verification\_primorial1 module
+---------------------------------------------
+
+.. automodule:: scripts.conj_verification_primorial1
    :members:
    :show-inheritance:
    :undoc-members:
