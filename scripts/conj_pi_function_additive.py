@@ -3,24 +3,28 @@ from sympy.functions.combinatorial.numbers import primepi
 from matplotlib import pyplot as plt
 
 
-if __name__ == "__main__":
-    """
-    This script contains codes for testing the conjecture :math: `Pi(xy) >= Pi(x) + Pi(y)` for :math:`2 <=x <= 17, 2 <= y <= 1500`.
+def func_pi_function_additive():
+    r"""
+    Notation
+    ----------
+    * The :math:`i^{\mathrm{th}}` prime is denoted as :math:`p_i`. 
+    * :math:`\pi(x)` denotes the prime counting function, i.e. the number of primes less than or equal to :math:`x`.
+
+    Description
+    -------------
+    This script contains codes for testing the conjecture :math:`\pi(xy) >= \pi(x) + \pi(y)` for :math:`2 \le x \le 17, 2 \le y \le 1500`.
+    
     We then generate plots for the following functions.
 
-    ----------
-    Notation:
-    The ith prime is denoted as p_i. 
-    Pi(x) denotes the prime counting function, i.e. the number of primes less than or equal to x.
+    Function 1: for :math:`y \ge 17`, we plot the term in brackets for :math:`(2y / \ln(y)) (1.0 - \ln(17) / \ln(17y))`
 
-    
-    Function 1: for :math:`y >=17`, we plot the term in brackets for :math:`(2y / ln(y)) (1.0 - ln(17) / ln(17y))`
     .. math:: 
-        1.0 - ln(17) / ln(17y)
+        1.0 - \ln(17) / \ln(17y)
     
     Function 2: for :math:`y >= 100`
+    
     .. math:: 
-        (2 - 1.26) y / ln(y) - Pi(17)
+        (2 - 1.26) y / \ln(y) - \pi(17)
     """
 
     # --------------------------------------------------------------------
@@ -80,3 +84,9 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     plt.show()
+
+
+
+if __name__ == "__main__":
+
+    func_pi_function_additive()

@@ -77,40 +77,6 @@ def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc
     return result_list
 
 
-@numba.njit(parallel=True)
-def __truncated_sum_function_numba(input_arr:np.ndarray, mlist:list, output_arr:np.ndarray):
-    r"""
-    Computes the truncated sum function sum_{k=0}^{m} (ln ln ln (n))^k / k!.
-    The shape of the input and output arrays must be same and must match size of mlist.
-    ...
-
-    Parameters
-    ----------
-    input_arr : np.ndarray
-        The array of ln ln ln(n) values, of shape (m,).
-    
-    mlist : list
-        The list of integer m values, of length m.
-    
-    output_arr : np.ndarray
-        The array of truncated sums,  of shape (m,).
-    
-    Returns
-    -------
-    The np.ndarray of the truncated sum function for each element in the input array, where the summation happens for m terms given by mlist values.
-    """
-
-    assert (output_arr.shape == input_arr.shape) and (output_arr.shape[0] == len(mlist))
-
-    m = len(mlist)
-    for i in numba.prange(m):
-        output_arr[i] = 1.0
-        fac = 1.0
-        for j in range(mlist[i]):
-            fac *= input_arr[i] / (j + 1)
-            output_arr[i] += fac
-
-
 def range_primorials_truncated_sum_lower_bound_func2(mstart:int, mend:int, nproc:int=1) -> np.ndarray:
     r"""
     Computes a lower bound to the truncated sum function :math:`\sum_{k=0}^{\omega(n)} \frac{1}{k!} (\ln \ln \ln (n))^k` for all the primorials, 
@@ -157,6 +123,40 @@ def range_primorials_truncated_sum_lower_bound_func2(mstart:int, mend:int, nproc
     __truncated_sum_function_lower_bound_func2_numba(input_arr=primes_log3_list, mstart=mstart, mend=mend, output_arr=result_list)
     
     return result_list
+
+
+@numba.njit(parallel=True)
+def __truncated_sum_function_numba(input_arr:np.ndarray, mlist:list, output_arr:np.ndarray):
+    r"""
+    Computes the truncated sum function sum_{k=0}^{m} (ln ln ln (n))^k / k!.
+    The shape of the input and output arrays must be same and must match size of mlist.
+    ...
+
+    Parameters
+    ----------
+    input_arr : np.ndarray
+        The array of ln ln ln(n) values, of shape (m,).
+    
+    mlist : list
+        The list of integer m values, of length m.
+    
+    output_arr : np.ndarray
+        The array of truncated sums,  of shape (m,).
+    
+    Returns
+    -------
+    The np.ndarray of the truncated sum function for each element in the input array, where the summation happens for m terms given by mlist values.
+    """
+
+    assert (output_arr.shape == input_arr.shape) and (output_arr.shape[0] == len(mlist))
+
+    m = len(mlist)
+    for i in numba.prange(m):
+        output_arr[i] = 1.0
+        fac = 1.0
+        for j in range(mlist[i]):
+            fac *= input_arr[i] / (j + 1)
+            output_arr[i] += fac
 
 
 @numba.njit

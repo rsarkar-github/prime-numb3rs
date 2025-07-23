@@ -5,13 +5,13 @@ import numpy as np
 def sigma_by_n_upper_bound_func1(mstart:int, mend:int) -> np.ndarray:
     r"""
     Computes the upper bound on the ratio :math:`\sigma(n)/n` of a prime :math:`n = {p_1}^{a_1}  ...  {p_m} ^ {a_m}`, with :math:`m` distinct prime factors, 
-    for :math:`\mathrm{mstart} <= m <= \mathrm{mend}`, where :math:`\sigma(n)` is the sum of divisors of :math:`n`. The primes :math:`p_1, ... , p_m` and 
+    for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`, where :math:`\sigma(n)` is the sum of divisors of :math:`n`. The primes :math:`p_1, ... , p_m` and 
     exponents :math:`a_1, ..., a_m` are irrelevant to the calculation.
 
     The upper bound function 1: 
 
     .. math::
-        \prod_{i=1}^{m} 1 / (1 - 1/p_i), 
+        \prod_{i=1}^{m} (1 - 1/p_i)^{-1}, 
     
     where :math:`p_i` is the :math:`i ^{\mathrm{th}}` prime.
 

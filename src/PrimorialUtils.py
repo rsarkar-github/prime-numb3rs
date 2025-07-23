@@ -20,7 +20,7 @@ def primorial(m:int) -> int:
     return sym.primorial(m)
 
 
-def first_m_primorials(m:int) -> list:
+def first_m_primorials(m:int) -> list[int]:
     r"""
     Computes the first :math:`m` primorial primes. The :math:`m^{\mathrm{th}}` primorial prime is given by
     :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
@@ -74,7 +74,7 @@ def first_m_primorials_log(m:int) -> np.ndarray:
     return primorial_log_list
 
 
-def range_primorials(mstart:int, mend:int) -> list:
+def range_primorials(mstart:int, mend:int) -> list[int]:
     r"""
     Computes the primorials, :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`. The :math:`m^{\mathrm{th}}` primorial prime is given by
     :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
@@ -106,7 +106,7 @@ def range_primorials(mstart:int, mend:int) -> list:
     return primorial_list
 
 
-def range_primorials_log(mstart:int, mend:int) -> list:
+def range_primorials_log(mstart:int, mend:int) -> list[float]:
     r"""
     Computes the logarithm (base :math:`e`) of the primorials, :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`.
 
@@ -137,7 +137,7 @@ def range_primorials_log(mstart:int, mend:int) -> list:
     return primorial_log_list
 
 
-def first_m_primes(m:int) -> list:
+def first_m_primes(m:int) -> list[int]:
     r"""
     Computes the first :math:`m` primes.
 
@@ -184,7 +184,7 @@ def first_m_primes_log(m:int) -> np.ndarray:
     return prime_log_list
 
 
-def range_primes(mstart:int, mend:int) -> list:
+def range_primes(mstart:int, mend:int) -> list[int]:
     r"""
     Computes the primes in the range :math:`\mathrm{prime(mstart)}` and :math:`\mathrm{prime(mend)}`, where :math:`\mathrm{prime}(k)` is the :math:`k^{\mathrm{th}}` prime.
 
@@ -295,3 +295,63 @@ def range_primorials_sigma_by_n(mstart:int, mend:int) -> np.ndarray:
         ratio_list[i + 1] = curr_prod
     
     return ratio_list
+
+
+def sum_first_m_primorials_inverse(m:int) -> list[float]:
+    r"""
+    Computes the sum of the inverses of the first :math:`k` primorial primes, for :math:`1 \le k \le m`. The :math:`m^{\mathrm{th}}` primorial prime is given by
+    :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
+
+    Parameters
+    ----------
+    m : int
+        The value of :math:`m`.
+
+    Returns
+    -------
+    list[float]
+        The list of the sums :math:`\frac{1}{p_1} + ... + \frac{1}{p_k}`, for :math:`1 \le k \le m`.
+    """
+
+    primes_list = first_m_primes(m=m)
+    output_list = []
+    
+    accum = 0.0
+    for i in range(m):
+        accum += 1.0 / primes_list[i]
+        output_list.append(accum)
+
+    return output_list
+
+
+def sum_range_primorials_inverse(mstart:int, mend:int) -> list[float]:
+    r"""
+    Computes the sum of the inverses of the first :math:`k` primorial primes, for :math:`\mathrm{mstart} \le k \le \mathrm{mend}`. The :math:`m^{\mathrm{th}}` primorial prime is given by
+    :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
+
+    Parameters
+    ----------
+    mstart : int
+        The start value of :math:`m`.
+    
+    mend : int
+        The end value of :math:`m`.
+
+    Returns
+    -------
+    list[float]
+        The list of the sums :math:`\frac{1}{p_1} + ... + \frac{1}{p_k}`, for :math:`\mathrm{mstart} \le k \le \mathrm{mend}`.
+    """
+
+    primes_list = first_m_primes(m=mend)
+    output_list = []
+    
+    accum = 0.0
+    for i in range(mstart - 1):
+        accum += 1.0 / primes_list[i]
+    
+    for i in range(mstart - 1, mend):
+        accum += 1.0 / primes_list[i]
+        output_list.append(accum)
+
+    return output_list

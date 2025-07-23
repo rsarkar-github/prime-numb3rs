@@ -12,6 +12,14 @@ scripts.conj\_pi\_function\_additive module
    :show-inheritance:
    :undoc-members:
 
+scripts.conj\_primorial\_raw\_bounds module
+-------------------------------------------
+
+.. automodule:: scripts.conj_primorial_raw_bounds
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 scripts.conj\_verification\_primorial module
 --------------------------------------------
 
