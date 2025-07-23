@@ -3,36 +3,37 @@ import numpy as np
 
 
 def primorial(m:int) -> int:
-    """
-    Computes the mth primorial prime.
-    ...
+    r"""
+    Computes the :math:`m^{\mathrm{th}}` primorial prime :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
     Parameters
     ----------
     m : int
-        The value of m.
+        The value of :math:`m`.
 
     Returns
     -------
-    The mth primorial prime.
+    int
+        The :math:`m^{\mathrm{th}}` primorial prime.
     """
 
     return sym.primorial(m)
 
 
 def first_m_primorials(m:int) -> list:
-    """
-    Computes the first m primorial primes.
-    ...
+    r"""
+    Computes the first :math:`m` primorial primes. The :math:`m^{\mathrm{th}}` primorial prime is given by
+    :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
     Parameters
     ----------
     m : int
-        The value of m.
+        The value of :math:`m`.
 
     Returns
     -------
-    The list of first m primorial primes.
+    list[int]
+        The list of first :math:`m` primorial primes.
     """
 
     primorial_list = []
@@ -47,18 +48,19 @@ def first_m_primorials(m:int) -> list:
 
 
 def first_m_primorials_log(m:int) -> np.ndarray:
-    """
-    Computes the logarithm (base e) of the first m primorial primes.
-    ...
+    r"""
+    Computes the logarithm (base :math:`e`) of the first :math:`m` primorial primes. The :math:`m^{\mathrm{th}}` primorial prime is given by
+    :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
     Parameters
     ----------
     m : int
-        The value of m.
+        The value of :math:`m`.
 
     Returns
     -------
-    The np.ndarray of logarithm (base e) of the first m primorial primes.
+    np.ndarray
+        The ndarray of logarithm (base :math:`e`) of the first :math:`m` primorial primes.
     """
 
     primorial_log_list = np.ndarray(shape=(m,), dtype=np.float64)
@@ -73,21 +75,22 @@ def first_m_primorials_log(m:int) -> np.ndarray:
 
 
 def range_primorials(mstart:int, mend:int) -> list:
-    """
-    Computes the primorials, primorial(m), for mstart <= m <= mend.
-    ...
+    r"""
+    Computes the primorials, :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`. The :math:`m^{\mathrm{th}}` primorial prime is given by
+    :math:`p_1 p_2 ... p_m`, where :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
     Parameters
     ----------
     mstart : int
-        The start value of m.
+        The start value of :math:`m`.
     
     mend : int
-        The end value of m.
+        The end value of :math:`m`.
 
     Returns
     -------
-    The list of the primorials between primorial(mstart) and primorial(mend).
+    list[int]
+        The list of the primorials between :math:`\mathrm{primorial(mstart)}` and :math:`\mathrm{primorial(mend)}`.
     """
 
     primorial_list = []
@@ -104,21 +107,21 @@ def range_primorials(mstart:int, mend:int) -> list:
 
 
 def range_primorials_log(mstart:int, mend:int) -> list:
-    """
-    Computes the logarithm (base e) of the primorials, primorial(m), for mstart <= m <= mend.
-    ...
+    r"""
+    Computes the logarithm (base :math:`e`) of the primorials, :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`.
 
     Parameters
     ----------
     mstart : int
-        The start value of m.
+        The start value of :math:`m`.
     
     mend : int
-        The end value of m.
+        The end value of :math:`m`.
 
     Returns
     -------
-    The np.ndarray of the logarithm (base e) for each primorial between primorial(mstart) and primorial(mend).
+    np.ndarray
+        The ndarray of the logarithm (base :math:`e`) for each primorial between :math:`\mathrm{primorial(mstart)}` and :math:`\mathrm{primorial(mend)}`.
     """
 
     primorial_log_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64)
@@ -135,18 +138,18 @@ def range_primorials_log(mstart:int, mend:int) -> list:
 
 
 def first_m_primes(m:int) -> list:
-    """
-    Computes the first m primes.
-    ...
+    r"""
+    Computes the first :math:`m` primes.
 
     Parameters
     ----------
     m : int
-        The value of m.
+        The value of :math:`m`.
 
     Returns
     -------
-    The list of first m primes.
+    list[int]
+        The list of first :math:`m` primes.
     """
     prime_list = []
 
@@ -158,18 +161,18 @@ def first_m_primes(m:int) -> list:
 
 
 def first_m_primes_log(m:int) -> np.ndarray:
-    """
-    Computes the logarithm (base e) of the first m primes.
-    ...
+    r"""
+    Computes the logarithm (base :math:`e`) of the first :math:`m` primes.
 
     Parameters
     ----------
     m : int
-        The value of m.
+        The value of :math:`m`.
 
     Returns
     -------
-    The np.ndarray of logarithm (base e) of the first m primes.
+    np.ndarray
+        The ndarray of logarithm (base :math:`e`) of the first :math:`m` primes.
     """
 
     prime_log_list = np.ndarray(shape=(m,), dtype=np.float64)
@@ -182,21 +185,21 @@ def first_m_primes_log(m:int) -> np.ndarray:
 
 
 def range_primes(mstart:int, mend:int) -> list:
-    """
-    Computes the primes in the range prime(mstart) and prime(mend), where prime(k) is the kth prime.
-    ...
+    r"""
+    Computes the primes in the range :math:`\mathrm{prime(mstart)}` and :math:`\mathrm{prime(mend)}`, where :math:`\mathrm{prime}(k)` is the :math:`k^{\mathrm{th}}` prime.
 
     Parameters
     ----------
     mstart : int
-        The start value of m.
+        The start value of :math:`m`.
     
     mend : int
-        The end value of m.
+        The end value of :math:`m`.
 
     Returns
     -------
-    The list the primes in the range prime(mstart) and prime(mend).
+    list[int]
+        The list the primes in the range :math:`\mathrm{prime(mstart)}` and :math:`\mathrm{prime(mend)}`.
     """
     prime_list = []
 
@@ -208,21 +211,21 @@ def range_primes(mstart:int, mend:int) -> list:
 
 
 def range_primes_log(mstart:int, mend:int) -> np.ndarray:
-    """
-    Computes the logarithm (base e) of all the primes in the range prime(mstart) and prime(mend), where prime(k) is the kth prime.
-    ...
+    r"""
+    Computes the logarithm (base :math:`e`) of all the primes in the range :math:`\mathrm{prime(mstart)}` and :math:`\mathrm{prime(mend)}`, where :math:`\mathrm{prime}(k)` is the :math:`k^{\mathrm{th}}` prime.
 
     Parameters
     ----------
     mstart : int
-        The start value of m.
+        The start value of :math:`m`.
     
     mend : int
-        The end value of m.
+        The end value of :math:`m`.
 
     Returns
     -------
-    The np.ndarray of logarithm (base e) of all the primes in the range prime(mstart) and prime(mend).
+    np.ndarray
+        The ndarray of logarithm (base :math:`e`) of all the primes in the range :math:`\mathrm{prime(mstart)}` and :math:`\mathrm{prime(mend)}`.
     """
     prime_log_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64)
 
@@ -234,18 +237,18 @@ def range_primes_log(mstart:int, mend:int) -> np.ndarray:
 
 
 def first_m_primorials_sigma_by_n(m:int) -> np.ndarray:
-    """
-    Computes the ratio sigma(n)/n of the first m primorials, where sigma(n) is the sum of divisors of n.
-    ...
+    r"""
+    Computes the ratio :math:`\sigma(n)/n` of the first :math:`m` primorials, where :math:`\sigma(n)` is the sum of divisors of :math:`n`.
 
     Parameters
     ----------
     m : int
-        The value of m.
+        The value of :math:`m`.
 
     Returns
     -------
-    The np.ndarray of the ratio sigma(n)/n of the first m primorials.
+    np.ndarray
+        The ndarray of the ratio :math:`\sigma(n)/n` of the first :math:`m` primorials.
     """
 
     ratio_list = np.ndarray(shape=(m,), dtype=np.float64)
@@ -260,21 +263,22 @@ def first_m_primorials_sigma_by_n(m:int) -> np.ndarray:
 
 
 def range_primorials_sigma_by_n(mstart:int, mend:int) -> np.ndarray:
-    """
-    Computes the ratio sigma(n)/n of the primorials, primorial(m), for mstart <= m <= mend., where sigma(n) is the sum of divisors of n.
-    ...
+    r"""
+    Computes the ratio :math:`\sigma(n)/n` of the primorials, :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`, 
+    where :math:`\sigma(n)` is the sum of divisors of :math:`n`.
 
     Parameters
     ----------
     mstart : int
-        The start value of m.
+        The start value of :math:`m`.
     
     mend : int
-        The end value of m.
+        The end value of :math:`m`.
 
     Returns
     -------
-    The np.ndarray of the ratio sigma(n)/n of for each primorial between primorial(mstart) and primorial(mend).
+    np.ndarray
+        The ndarray of the ratio :math:`\sigma(n)/n` for each primorial between :math:`\mathrm{primorial(mstart)}` and :math:`\mathrm{primorial(mend)}`.
     """
 
     curr_prod = 1.0

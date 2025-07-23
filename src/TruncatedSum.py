@@ -6,9 +6,9 @@ from src import PrimorialUtils as prim
 
 
 def range_primorials_truncated_sum(mstart:int, mend:int, nproc:int=1) -> np.ndarray:
-    """
-    Computes the truncated sum function :math:`\sum_{k=0}^{\omega(n)} (\ln \ln \ln (n))^k / k!` for all the primorials, primorial(m), for :math:`mstart \le m \le mend`.
-    Here :math:`\omega(n)=m` is the number of unique primes of :math:`n`, where :math:`n` is the :math:`m^{th}` primorial prime given by :math:`n = p_1 p_2 ... p_m`, and :math:`p_k` is the :math:`k^{th}` prime.
+    r"""
+    Computes the truncated sum function :math:`\sum_{k=0}^{\omega(n)} \frac{1}{k!}(\ln \ln \ln (n))^k` for all the primorials, :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`.
+    Here :math:`\omega(n)=m` is the number of unique primes of :math:`n`, where :math:`n` is the :math:`m^{\mathrm{th}}` primorial prime given by :math:`n = p_1 p_2 ... p_m`, and :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
     Parameters
     ----------
@@ -23,7 +23,8 @@ def range_primorials_truncated_sum(mstart:int, mend:int, nproc:int=1) -> np.ndar
 
     Returns
     -------
-    The np.ndarray of the truncated sum function for each primorial between primorial(mstart) and primorial(mend).
+    np.ndarray
+        The ndarray of the truncated sum function for each primorial between :math:`\mathrm{primorial(mstart)}` and :math:`\mathrm{primorial(mend)}`.
     """
 
     assert nproc >= 1
@@ -39,28 +40,28 @@ def range_primorials_truncated_sum(mstart:int, mend:int, nproc:int=1) -> np.ndar
 
 
 def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc:int=1) -> np.ndarray:
-    """
-    Computes a lower bound to the truncated sum function sum_{k=0}^{omega(n)} (ln ln ln (n))^k / k! for all the primorials, 
-    primorial(m), for mstart <= m <= mend. Here omega(n)=m is the number of unique primes of n, 
-    where n is the mth primorial prime given by n = p1 * p2 * ... * pm, and pk is the kth prime.
+    r"""
+    Computes a lower bound to the truncated sum function :math:`\sum_{k=0}^{\omega(n)} \frac{1}{k!} (\ln \ln \ln (n))^k` for all the primorials, 
+    :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`. Here :math:`\omega(n)=m` is the number of unique primes of :math:`n`, 
+    where :math:`n` is the :math:`m^{\mathrm{th}}` primorial prime given by :math:`n = p_1 p_2 ... p_m`, and :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
-    The lower bound is obtained by setting n = 5040.
-    ...
+    The lower bound is obtained by setting :math:`n = 5040`.
 
     Parameters
     ----------
     mstart : int
-        The start value of m.
+        The start value of :math:`m`.
     
     mend : int
-        The end value of m.
+        The end value of :math:`m`.
     
     nproc: int
         Number of processors to use for parallelization. Default is 1.
 
     Returns
     -------
-    The np.ndarray of the truncated sum function for each primorial between primorial(mstart) and primorial(mend).
+    np.ndarray
+        The ndarray of the truncated sum function for each primorial between :math:`\mathrm{primorial(mstart)}` and :math:`\mathrm{primorial(mend)}`.
     """
 
     assert nproc >= 1
@@ -78,7 +79,7 @@ def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc
 
 @numba.njit(parallel=True)
 def __truncated_sum_function_numba(input_arr:np.ndarray, mlist:list, output_arr:np.ndarray):
-    """
+    r"""
     Computes the truncated sum function sum_{k=0}^{m} (ln ln ln (n))^k / k!.
     The shape of the input and output arrays must be same and must match size of mlist.
     ...
@@ -111,8 +112,8 @@ def __truncated_sum_function_numba(input_arr:np.ndarray, mlist:list, output_arr:
 
 
 def range_primorials_truncated_sum_lower_bound_func2(mstart:int, mend:int, nproc:int=1) -> np.ndarray:
-    """
-    Computes a lower bound to the truncated sum function :math:`\sum_{k=0}^{\omega(n)} (\ln \ln \ln (n))^k / k!` for all the primorials, 
+    r"""
+    Computes a lower bound to the truncated sum function :math:`\sum_{k=0}^{\omega(n)} \frac{1}{k!} (\ln \ln \ln (n))^k` for all the primorials, 
     :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`. Here :math:`\omega(n)=m` is the number of unique primes of :math:`n`, 
     where :math:`n` is the :math:`m^{\mathrm{th}}` primorial prime given by :math:`n = p_1 p_2 ... p_m`, and :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
@@ -121,9 +122,8 @@ def range_primorials_truncated_sum_lower_bound_func2(mstart:int, mend:int, nproc
     
     .. math::
 
-        S(\mathrm{mstart}) = \sum_{k=0}^{\mathrm{mstart}} (\ln \ln \ln (\mathrm{primorial(mstart)}))^k / k!,
-
-        S(k) = S(k-1) + (\ln \ln \ln(n_k))^k / k!,
+        S(\mathrm{mstart}) &= \sum_{k=0}^{\mathrm{mstart}} \frac{1}{k!} (\ln \ln \ln (\mathrm{primorial(mstart)}))^k, \\
+        S(k) &= S(k-1) + \frac{1}{k!} (\ln \ln \ln(n_k))^k, \quad \mathrm{mstart} + 1 \le k \le \mathrm{mend}.
     
     where :math:`n_k = p_1 p_2 ... p_k`.
     
@@ -161,7 +161,7 @@ def range_primorials_truncated_sum_lower_bound_func2(mstart:int, mend:int, nproc
 
 @numba.njit
 def __truncated_sum_function_lower_bound_func2_numba(input_arr:np.ndarray, mstart:int, mend:int, output_arr:np.ndarray):
-    """
+    r"""
     Computes a lower bound to the truncated sum function sum_{k=0}^{omega(n)} (ln ln ln (n))^k / k! for all the primorials, given by lower bound func2.
     The shape of the input and output arrays must be same and must match size of mlist. Here omega(n)=m is the number of unique primes of n, 
     where n is the mth primorial prime given by n = p1 * p2 * ... * pm, and pk is the kth prime.
@@ -169,12 +169,11 @@ def __truncated_sum_function_lower_bound_func2_numba(input_arr:np.ndarray, mstar
     The lower bound is obtained by only considering the leading order term in the sum and adding it to the value of the lower bound for the
     previous value of m. So recursively the lower bound is computed as follows:
 
-    ..math::
+    .. math::
         S(m) = sum_{k=0}^{m} (ln ln ln (n))^k / k!,
         S(k) = S(k-1) + (ln ln ln(n_k))^k / k!,
     
     where :math:`n_k = p1 * p2 * ... * pk`.
-    ...
 
     Parameters
     ----------
@@ -192,7 +191,8 @@ def __truncated_sum_function_lower_bound_func2_numba(input_arr:np.ndarray, mstar
     
     Returns
     -------
-    The np.ndarray of the lower bound for the truncated sum function for each primorial between primorial(mstart) and primorial(mend).
+    np.ndarray
+        The np.ndarray of the lower bound for the truncated sum function for each primorial between primorial(mstart) and primorial(mend).
     """
 
     m = mend - mstart + 1

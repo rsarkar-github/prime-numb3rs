@@ -37,20 +37,20 @@ class NtConstants:
     @property
     def e(self):
         """
-        The property 'e'.
+        :math:`e = 2.71828`.
         """
         return self._e
     
     @property
     def egamma(self):
-        """
-        The property 'gamma'.
+        r"""
+        :math:`\gamma = 0.57721`.
         """
         return self._gamma
     
     @property
     def epowgamma(self):
-        """
-        The property 'epowgamma'.
+        r"""
+        :math:`e^{\gamma} = 1.78107`.
         """
         return self._epowgamma
