@@ -22,6 +22,10 @@ conda install conda-forge::sphinx_rtd_theme
 - First make sure that you are inside the root level directory of this project.
 - Run `python -m scripts.scriptname`.
 
+# To run a script in the subdirectory **paper/scripts**
+- First make sure that you are inside the root level directory of this project.
+- Run `python -m paper.scripts.scriptname`.
+
 ## Building documentation help
 - First cd into `docs/`.
 - Execute the command `make html`.
