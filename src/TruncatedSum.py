@@ -39,13 +39,13 @@ def range_primorials_truncated_sum(mstart:int, mend:int, nproc:int=1) -> np.ndar
     return result_list
 
 
-def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc:int=1) -> np.ndarray:
+def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nval:int=5040, nproc:int=1) -> np.ndarray:
     r"""
     Computes a lower bound to the truncated sum function :math:`\sum_{k=0}^{\omega(n)} \frac{1}{k!} (\ln \ln \ln (n))^k` for all the primorials, 
     :math:`\mathrm{primorial}(m)`, for :math:`\mathrm{mstart} \le m \le \mathrm{mend}`. Here :math:`\omega(n)=m` is the number of unique primes of :math:`n`, 
     where :math:`n` is the :math:`m^{\mathrm{th}}` primorial prime given by :math:`n = p_1 p_2 ... p_m`, and :math:`p_k` is the :math:`k^{\mathrm{th}}` prime.
 
-    The lower bound is obtained by setting :math:`n = 5040`.
+    The lower bound is obtained by setting :math:`nval (default = 5040)`.
 
     Parameters
     ----------
@@ -55,6 +55,9 @@ def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc
     mend : int
         The end value of :math:`m`.
     
+    nval : int
+        The lower bound to use for :math:`n`.
+
     nproc: int
         Number of processors to use for parallelization. Default is 1.
 
@@ -67,7 +70,7 @@ def range_primorials_truncated_sum_lower_bound_func1(mstart:int, mend:int, nproc
     assert nproc >= 1
     numba.set_num_threads(n=min(nproc, mp.cpu_count()))
 
-    primes_log3_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64) * 0 + 5040
+    primes_log3_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64) * 0 + nval
     primes_log3_list = np.log(np.log(np.log(primes_log3_list)))
     result_list = np.ndarray(shape=(mend - mstart + 1,), dtype=np.float64)
     m = [i for i in range(mstart, mend+1)]

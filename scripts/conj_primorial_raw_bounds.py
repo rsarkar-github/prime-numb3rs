@@ -58,7 +58,7 @@ def func_primorial_raw_bounds():
     
     # Set m values, nproc
     mstart = 2
-    mend = 1000
+    mend = 10
     nproc = 16
 
     mlist = np.arange(mstart, mend + 1, 1)
@@ -70,6 +70,8 @@ def func_primorial_raw_bounds():
     # Compute rhs and rhs upper bound of the conjecture
     rhs = range_primorials_truncated_sum(mstart=mstart, mend=mend, nproc=nproc)
     rhs_ub = np.log(range_primorials_log(mstart=mstart, mend=mend))
+
+    print(rhs / lhs)
 
     # Compute rhs lower bound of the conjecture
     primorials_log3 = np.log(np.log(range_primorials_log(mstart=mstart, mend=mend)))
@@ -86,7 +88,7 @@ def func_primorial_raw_bounds():
     # Plot the two functions
     plt.figure()
     plt.plot(mlist, lhs, '-r', linewidth= 1)
-    plt.plot(mlist, lhs_ub, '--r', linewidth= 1)
+    plt.plot(mlist, 0.85 * lhs_ub, '--r', linewidth= 1)
     plt.plot(mlist, rhs, '-g', linewidth= 1)
     plt.plot(mlist, rhs_ub, '--g', linewidth= 1)
     plt.plot(mlist, rhs_lb, '-.g', linewidth= 1)
